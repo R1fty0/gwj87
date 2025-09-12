@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://jyc0qigpfyxj"]
+
+[ext_resource type="PackedScene" uid="uid://cobemsr335vmd" path="res://scenes/world/planet.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dltt2ed2il1li" path="res://scenes/spaceship/spaceship.tscn" id="2_sugp2"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Planet" parent="." instance=ExtResource("1_o5qli")]
+
+[node name="Spaceship" parent="Planet/Planet/OrbitPivot" index="0" instance=ExtResource("2_sugp2")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0.715663)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SwitchViewButton" type="Button" parent="UI"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[editable path="Planet"]
+[editable path="Planet/Planet/OrbitPivot/Spaceship"]

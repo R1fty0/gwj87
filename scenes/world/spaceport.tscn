@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtnsllex0cxxk"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a71r2"]
+size = Vector2(100, 100)
+
+[node name="SpaceportRoot" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_a71r2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.907059, -0.378065, 0.185229, 0, 0.439973, 0.898011, -0.421002, -0.81455, 0.399081, 1.77841, 5.65557, 2.93677)

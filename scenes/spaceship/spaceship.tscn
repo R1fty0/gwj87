@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dltt2ed2il1li"]
+
+[ext_resource type="PackedScene" uid="uid://dfyxae4ug0r3k" path="res://scenes/orbit_controller/orbit_controller.tscn" id="1_p7w4s"]
+[ext_resource type="Script" uid="uid://b3uq7fgok8qmc" path="res://scenes/orbit_controller/orbit_controller.gd" id="2_eggx0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1xj6k"]
+
+[node name="Spaceship" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1xj6k")
+
+[node name="OrbitController" parent="." instance=ExtResource("1_p7w4s")]
+script = ExtResource("2_eggx0")

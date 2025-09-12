@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cobemsr335vmd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_o5qli"]
+sky_material = SubResource("ProceduralSkyMaterial_sgp6g")
+
+[sub_resource type="Environment" id="Environment_0wfyh"]
+background_mode = 2
+sky = SubResource("Sky_o5qli")
+tonemap_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_sgp6g"]
+
+[node name="PlanetSceneRoot" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0wfyh")
+
+[node name="Planet" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_sgp6g")
+skeleton = NodePath("../..")
+
+[node name="OrbitPivot" type="Marker3D" parent="Planet" groups=["orbit_pivot"]]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.932652, -0.125744, 0.338154, 0, 0.937295, 0.348537, -0.360777, -0.325064, 0.87417, 0.399998, 0.443805, 1.51586)
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true

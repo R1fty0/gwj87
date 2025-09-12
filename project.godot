@@ -11,8 +11,21 @@ config_version=5
 [application]
 
 config/name="gwj87"
+run/main_scene="uid://jyc0qigpfyxj"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SceneManager="*res://singletons/scene_manager.gd"
+SignalBus="*res://singletons/signal_bus.gd"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://scenes/": "green"
+}
 
 [rendering]
 
