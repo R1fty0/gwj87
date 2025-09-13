@@ -1,20 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://jyc0qigpfyxj"]
+[gd_scene load_steps=6 format=3 uid="uid://jyc0qigpfyxj"]
 
 [ext_resource type="PackedScene" uid="uid://cobemsr335vmd" path="res://scenes/world/planet.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://dltt2ed2il1li" path="res://scenes/spaceship/spaceship.tscn" id="2_sugp2"]
+[ext_resource type="Environment" uid="uid://bfvolnvbalnaq" path="res://resources/environments/spaceport.tres" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://bjtb4pp1nawr1" path="res://scripts/view_manager.gd" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://dtnsllex0cxxk" path="res://scenes/world/spaceport.tscn" id="3_sugp2"]
+[ext_resource type="Environment" uid="uid://b0s6tuwlm5v15" path="res://resources/environments/planet.tres" id="4_jyhfs"]
 
 [node name="Main" type="Node3D"]
 
-[node name="Planet" parent="." instance=ExtResource("1_o5qli")]
+[node name="ViewManager" type="Node" parent="." node_paths=PackedStringArray("world_environment", "spaceport_camera", "planet_camera")]
+script = ExtResource("3_jyhfs")
+world_environment = NodePath("../WorldEnvironment")
+spaceport_camera = NodePath("../SpaceportRoot/SpaceportCamera")
+planet_camera = NodePath("../PlanetRoot/PlanetCamera")
+spaceport_environment = ExtResource("2_tbgi4")
+planet_environment = ExtResource("4_jyhfs")
 
-[node name="Spaceship" parent="Planet/Planet/OrbitPivot" index="0" instance=ExtResource("2_sugp2")]
-transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0.715663)
+[node name="PlanetRoot" parent="." instance=ExtResource("1_o5qli")]
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="SpaceportRoot" parent="." instance=ExtResource("3_sugp2")]
 
-[node name="SwitchViewButton" type="Button" parent="UI"]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_jyhfs")
 
-[editable path="Planet"]
-[editable path="Planet/Planet/OrbitPivot/Spaceship"]
+[editable path="PlanetRoot"]
+[editable path="SpaceportRoot"]
