@@ -1,27 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://jyc0qigpfyxj"]
+[gd_scene load_steps=5 format=3 uid="uid://jyc0qigpfyxj"]
 
 [ext_resource type="PackedScene" uid="uid://cobemsr335vmd" path="res://scenes/world/planet.tscn" id="1_o5qli"]
 [ext_resource type="Environment" uid="uid://bfvolnvbalnaq" path="res://resources/environments/spaceport.tres" id="2_tbgi4"]
 [ext_resource type="Script" uid="uid://bjtb4pp1nawr1" path="res://scripts/view_manager.gd" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dtnsllex0cxxk" path="res://scenes/world/spaceport.tscn" id="3_sugp2"]
-[ext_resource type="Environment" uid="uid://b0s6tuwlm5v15" path="res://resources/environments/planet.tres" id="4_jyhfs"]
 
 [node name="Main" type="Node3D"]
 
-[node name="ViewManager" type="Node" parent="." node_paths=PackedStringArray("world_environment", "spaceport_camera", "planet_camera")]
+[node name="ViewManager" type="Node" parent="." node_paths=PackedStringArray("world_environment", "spaceport", "planet")]
 script = ExtResource("3_jyhfs")
 world_environment = NodePath("../WorldEnvironment")
-spaceport_camera = NodePath("../SpaceportRoot/SpaceportCamera")
-planet_camera = NodePath("../PlanetRoot/PlanetCamera")
-spaceport_environment = ExtResource("2_tbgi4")
-planet_environment = ExtResource("4_jyhfs")
+starting_view = 1
+spaceport = NodePath("../SpaceportRoot/SpaceportVisualController")
+planet = NodePath("../PlanetRoot/PlanetVisualController")
 
 [node name="PlanetRoot" parent="." instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.0934, 0)
 
 [node name="SpaceportRoot" parent="." instance=ExtResource("3_sugp2")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("4_jyhfs")
+environment = ExtResource("2_tbgi4")
 
 [editable path="PlanetRoot"]
 [editable path="SpaceportRoot"]

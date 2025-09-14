@@ -1,55 +1,36 @@
 extends Node
 
-
+## Reference to the world environment 
 @export var world_environment: WorldEnvironment
-## Which view will be active when the game starts. 
-@export var active_view_on_load: ActiveView
+@export var starting_view: View
 
-@export_category("Cameras")
-@export var spaceport_camera: Camera3D
-@export var planet_camera: Camera3D
-
-@export_category("Environments")
-@export var spaceport_environment: Environment
-@export var planet_environment: Environment
+@export_category("Visual Controllers")
+@export var spaceport: VisualController
+@export var planet: VisualController
 
 
-enum ActiveView
+enum View
 {
 	SPACEPORT,
 	PLANET
 }
 
-var current_view: ActiveView = ActiveView.SPACEPORT
+var active_view: View = View.SPACEPORT
+
+func _ready() -> void:
+	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("change_view"):
 		SignalBus.change_view.emit()
-		#_change_view()
-
-func _change_view(new_camera: Camera3D, new_world_env: Environment):
-	# Switch from spaceport to planet
-	if current_view == ActiveView.SPACEPORT:
-		# Switch the camera perspective 
-		spaceport_camera.current = false
-		planet_camera.current = true
-		# Switch the world environment 
-		world_environment.environment = planet_environment
-		# Switch the lights 
-		var planet_lights = get_tree().get_nodes_in_group("planet_lights")
-		for light in planet_lights:
-			light.enabled = true
-		# Switch the meshes
-		var planet_meshes = get_tree().get_nodes_in_group("planet_meshes")
-		for mesh in planet_meshes:
-			mesh.visible = false
-		current_view = ActiveView.PLANET
-	# Switch from planet to spaceport
-	elif current_view == ActiveView.PLANET:
-		spaceport_camera.current = true
-		planet_camera.current = false
-		world_environment.environment = spaceport_environment
-		var spaceport_lights = get_tree().get_nodes_in_group("spaceport_lights")
-		for light in spaceport_lights:
-			light.enabled = true
-		current_view = ActiveView.SPACEPORT
+		# Swtich to the planet view. 
+		if active_view == View.SPACEPORT:
+			spaceport.disable_view()
+			spaceport.enable_view(world_environment)
+			active_view = View.PLANET
+		# Switch to the spaceport view. 
+		elif active_view == View.PLANET:
+			planet.disable_view()
+			spaceport.enable_view(world_environment)
+			active_view = View.SPACEPORT
+	

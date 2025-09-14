@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="gwj87"
+config/name="gwj85"
 run/main_scene="uid://jyc0qigpfyxj"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -36,6 +36,8 @@ folder_colors={
 
 planet_lighting=""
 spaceport_lighting=""
+planet_meshes=""
+spaceport_meshes=""
 
 [input]
 

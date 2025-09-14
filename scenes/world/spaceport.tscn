@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtnsllex0cxxk"]
+[gd_scene load_steps=4 format=3 uid="uid://dtnsllex0cxxk"]
+
+[ext_resource type="Script" uid="uid://bs68kp52nmlhv" path="res://common/visual_controller.gd" id="1_y8w3i"]
+[ext_resource type="Environment" uid="uid://bfvolnvbalnaq" path="res://resources/environments/spaceport.tres" id="2_sbpch"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a71r2"]
 size = Vector2(100, 100)
 
 [node name="SpaceportRoot" type="Node3D"]
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="SPGround" type="MeshInstance3D" parent="." groups=["spaceport_meshes"]]
 mesh = SubResource("PlaneMesh_a71r2")
 
 [node name="SpaceportCamera" type="Camera3D" parent="."]
@@ -13,6 +16,13 @@ transform = Transform3D(0.907059, -0.378065, 0.185229, 0, 0.439973, 0.898011, -0
 
 [node name="Lighting" type="Node" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting" groups=["spaceport_lighting"]]
+[node name="SPDirectionalLight3D" type="DirectionalLight3D" parent="Lighting" groups=["spaceport_lighting"]]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
+
+[node name="SpaceportVisualController" type="Node" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("1_y8w3i")
+camera = NodePath("../SpaceportCamera")
+env_resource = ExtResource("2_sbpch")
+scene_type = 0
+metadata/_custom_type_script = "uid://bs68kp52nmlhv"
